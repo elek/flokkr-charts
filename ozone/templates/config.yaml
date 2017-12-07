@@ -33,7 +33,7 @@ data:
     <property><name>ozone.ksm.address</name><value>{{ template "ozone.fullname" . }}-ksm-0.{{ template "ozone.fullname" . }}-ksm</value></property>
     <property><name>ozone.enabled</name><value>True</value></property>
     <property><name>ozone.scm.datanode.id</name><value>/data/datanode.id</value></property>
-    <property><name>ozone.scm.client.address</name><value>scm-0.scm</value></property>
+    <property><name>ozone.scm.client.address</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
     <property><name>ozone.metadata.dirs</name><value>/data/metadata</value></property>
     <property><name>ozone.scm.names</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
     </configuration>
