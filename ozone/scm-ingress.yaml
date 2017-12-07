@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+ rules:
+ - host: "melek-k3-0"
+   http:
+    paths:
+      - path: /scm
+        backend:
+          serviceName: o5-ozone-scm
+          servicePort: 9876

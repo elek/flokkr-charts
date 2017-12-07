@@ -1,0 +1,40 @@
+apiVersion: v1
+metadata:
+  name: hadoopconf
+  labels:
+    app: {{ template "ozone.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  core-site.xml: |-
+    <configuration>
+    <property><name>fs.defaultFS</name><value>hdfs://{{ template "ozone.fullname" . }}-namenode-0.{{ template "ozone.fullname" . }}-namenode:9000</value></property>
+    </configuration>
+  hdfs-site.xml: |-
+    <configuration>
+    <property><name>dfs.namenode.rpc-address</name><value>{{ template "ozone.fullname" . }}-namenode-0.{{ template "ozone.fullname" . }}-namenode:9000</value></property>
+    <property><name>dfs.replication</name><value>3</value></property>
+    <property><name>dfs.permissions.superusergroup</name><value>admin</value></property>
+    <property><name>dfs.datanode.data.dir</name><value>/data/datanode</value></property>
+    <property><name>dfs.namenode.name.dir</name><value>/data/namenode</value></property>
+    <property><name>dfs.namenode.http-bind-host</name><value>0.0.0.0</value></property>
+    <property><name>dfs.namenode.datanode.registration.ip-hostname-check</name><value>false</value></property>
+    </configuration>
+  log4j.properties: |-
+    log4j.rootLogger: INFO, stdout
+    log4j.appender.stdout: org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout: org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern: %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+  ozone-site.xml: |-
+    <configuration>
+    <property><name>ozone.scm.block.client.address</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
+    <property><name>ozone.handler.type</name><value>distributed</value></property>
+    <property><name>ozone.ksm.address</name><value>{{ template "ozone.fullname" . }}-ksm-0.{{ template "ozone.fullname" . }}-ksm</value></property>
+    <property><name>ozone.enabled</name><value>True</value></property>
+    <property><name>ozone.scm.datanode.id</name><value>/data/datanode.id</value></property>
+    <property><name>ozone.scm.client.address</name><value>scm-0.scm</value></property>
+    <property><name>ozone.metadata.dirs</name><value>/data/metadata</value></property>
+    <property><name>ozone.scm.names</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
+    </configuration>
+kind: ConfigMap

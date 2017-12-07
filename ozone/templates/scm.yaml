@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "ozone.fullname" . }}-scm
+  labels:
+    app: {{ template "ozone.fullname" . }}-scm
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  clusterIP: None
+  ports:
+  - port: 9876
+    name: scm
+  selector:
+     app: {{ template "ozone.fullname" . }}-scm
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "ozone.fullname" . }}-scm
+spec:
+  serviceName: {{ template "ozone.fullname" . }}-scm
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "ozone.fullname" . }}-scm
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      containers:
+        - name: scm
+          image: flokkr/hadoop:ozone
+          args: ["hdfs","scm"]
+          env:
+            - name: ENSURE_SCM_INITIALIZED
+              value: /data/metadata/scm/current/VERSION
+            - name: PROMETHEUSJMX_ENABLED
+              value: "true"
+            - name: PROMETHEUSJMX_AGENTOPTS
+              value: port=28942
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: hadoopconf
