@@ -1,0 +1,12 @@
+Apache Hadoop up and running. Please use port forwarding to access the pod ports:
+
+
+export RM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "yarn.fullname" . }}-nodemanager,release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}"
+kubectl port-forward $RM_POD_NAME 9876:9876
+
+{{- if .Values.ingress.enabled }}
+You can also access the cluster oger
+{{- range .Values.ingress.hosts }}
+  http://{{ . }}/namenode
+{{- end }}
+{{- end }}

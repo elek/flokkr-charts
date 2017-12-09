@@ -1,0 +1,46 @@
+# Default values for ozone.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#replicaCount: 1
+image:
+  tag: latest
+#  repository: nginx
+#  tag: stable
+#  pullPolicy: IfNotPresent
+#service:
+#  name: nginx
+#  type: ClusterIP
+#  externalPort: 80
+#  internalPort: 80
+prometheus:
+  enabled: false
+
+defaultFs: hdfs://hdfs-hdfs-namenode-0.hdfs-hdfs-namenode:9000
+ingress:
+  enabled: true
+  hosts:
+    - chart-example.local
+  annotations:
+     traefik.frontend.rule.type: PathPrefixStrip
+customEnvs:
+  LOG4J.PROPERTIES_log4j.rootLogger: "INFO, stdout"
+  LOG4J.PROPERTIES_log4j.appender.stdout: "org.apache.log4j.ConsoleAppender"
+  LOG4J.PROPERTIES_log4j.appender.stdout.layout: "org.apache.log4j.PatternLayout"
+  LOG4J.PROPERTIES_log4j.appender.stdout.layout.ConversionPattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+  MAPRED-SITE.XML_mapreduce.framework.name: "yarn"
+  YARN-SITE.XML_yarn.nodemanager.pmem-check-enabled: "false"
+  YARN-SITE.XML_yarn.nodemanager.delete.debug-delay-sec: "600"
+  YARN-SITE.XML_yarn.nodemanager.vmem-check-enabled: "false"
+  YARN-SITE.XML_yarn.nodemanager.aux-services: "mapreduce_shuffle"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.maximum-applications: "10000"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.maximum-am-resource-percent: "0.1"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.resource-calculator: "org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.queues: "default"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.capacity: "100"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.user-limit-factor: "1"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.maximum-capacity: "100"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.state: "RUNNING"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.acl_submit_applications: "*"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.root.default.acl_administer_queue: "*"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.node-locality-delay: "40"
+  CAPACITY-SCHEDULER.XML_yarn.scheduler.capacity.queue-mappings: ""

@@ -1,0 +1,54 @@
+iapiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "yarn.fullname" . }}-resourcemanager
+  labels:
+    app: {{ template "yarn.fullname" . }}-resourcemanager
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  ports:
+  - port: 50070
+    name: web
+  clusterIP: None
+  selector:
+     app: {{ template "yarn.fullname" . }}-resourcemanager
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "yarn.fullname" . }}-resourcemanager
+spec:
+  serviceName: {{ template "yarn.fullname" . }}-resourcemanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "yarn.fullname" . }}-resourcemanager
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      containers:
+        - name: resourcemanager
+          image: flokkr/hadoop-yarn-resourcemanager:{{ .Values.image.tag }}
+          env:
+            - name: CORE-SITE.XML_fs.defaultFS
+              value: {{ .Values.defaultFs }}
+            - name: YARN-SITE.XML_yarn.resourcemanager.hostname
+              value: {{ template "yarn.fullname" . }}-resourcemanager-0.{{ template "yarn.fullname" . }}-resourcemanager
+{{- if .Values.prometheus.enabled }}
+            - name: PROMETHEUSJMX_ENABLED
+              value: "true"
+            - name: PROMETHEUSJMX_AGENTOPTS
+              value: port=28942
+{{- end -}}
+            {{- range $key, $value := .Values.customEnvs }}
+            - name: {{ $key | quote }}
+              value: {{ $value | quote }}
+            {{- end }}
+

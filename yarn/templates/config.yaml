@@ -1,0 +1,35 @@
+apiVersion: v1
+metadata:
+  name: {{ template "yarn.fullname" . }}-conf
+  labels:
+    app: {{ template "yarn.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  core-site.xml: |-
+    <configuration>
+    <property><name>fs.defaultFS</name><value>{{ .Values.defaultFS }}</value></property>
+    </configuration>
+  yarn-site.xml: |-
+    <configuration>
+    <property><name>yarn.resourcemanager.hostname: [[ service "resourcemanager"]]
+    <property><name>yarn.nodemanager.pmem-check-enabled: false
+    <property><name>yarn.nodemanager.delete.debug-delay-sec: 600
+    <property><name>yarn.nodemanager.vmem-check-enabled: false
+    <property><name>yarn.nodemanager.aux-services: mapreduce_shuffle
+    <property><name>yarn.nodemanager.delete.thread-count: 0
+    <property><name>yarn.nodemanager.local-dirs: /data/nodemanagerlocaldir
+    <property><name>yarn.nodemanager.log-dirs: /data/yarn-userlogs
+    <property><name>yarn.nodemanager.remote-app-log-dir: /data/yarn-remotelogs
+    <property><name>yarn.resourcemanager.bind-host: 0.0.0.0
+    <property><name>yarn.nodemanager.bind-host: 0.0.0.0
+    <property><name>yarn.scheduler.maximum-allocation-mb: 12000
+    <property><name>yarn.nodemanager.resource.memory-mb: 12000
+    </configuration>
+  log4j.properties: |-
+    log4j.rootLogger: INFO, stdout
+    log4j.appender.stdout: org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout: org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern: %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+kind: ConfigMap

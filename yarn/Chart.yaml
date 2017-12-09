@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for Apache Hadoop Yarn cluster
+name: yarn
+version: 0.1.1
