@@ -4,9 +4,7 @@ metadata:
   name: {{ template "ozone.fullname" . }}-scm
   labels:
     app: {{ template "ozone.fullname" . }}-scm
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "ozone.commonlabels" . | indent 4}}
 spec:
   clusterIP: None
   ports:
@@ -26,13 +24,15 @@ spec:
     metadata:
       labels:
         app: {{ template "ozone.fullname" . }}-scm
+{{ include "ozone.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
         - name: scm
-          image: flokkr/hadoop:ozone
+          image: flokkr/hadoop:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           args: ["hdfs","scm"]
           env:
             - name: ENSURE_SCM_INITIALIZED
@@ -48,4 +48,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: hadoopconf
+            name: {{ template "ozone.fullname" . }}-config

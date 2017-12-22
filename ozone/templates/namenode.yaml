@@ -4,9 +4,7 @@ metadata:
   name: {{ template "ozone.fullname" . }}-namenode
   labels:
     app: {{ template "ozone.fullname" . }}-namenode
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "ozone.commonlabels" . | indent 4}}
 spec:
   ports:
   - port: 50070
@@ -26,13 +24,15 @@ spec:
     metadata:
       labels:
         app: {{ template "ozone.fullname" . }}-namenode
+{{ include "ozone.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
         - name: namenode
-          image: flokkr/hadoop-hdfs-namenode:ozone
+          image: flokkr/hadoop-hdfs-namenode:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           env:
             - name: ENSURE_NAMENODE_DIR
               value: /data/namenode
@@ -47,4 +47,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: hadoopconf
+            name: {{ template "ozone.fullname" . }}-config

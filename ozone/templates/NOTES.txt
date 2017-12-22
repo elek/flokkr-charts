@@ -1,6 +1,12 @@
-Apache Hadoop HDFS-7240 up and running. Please use port forwarding to access the pod ports:
+Apache Hadoop HDFS-7240 up and running.
 
 
-export SCM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "ozone.name" . }}-scm,release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+You can access the components with
+
+
+1. PORT forwarding
+
+export SCM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "ozone.fullname" . }}-scm,release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $SCM_POD_NAME 9876:9876
-
+export KSM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "ozone.fullname" . }}-ksm,release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward $KSM_POD_NAME 9874:9874

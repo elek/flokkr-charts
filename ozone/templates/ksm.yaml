@@ -4,9 +4,7 @@ metadata:
   name: {{ template "ozone.fullname" . }}-ksm
   labels:
     app: {{ template "ozone.fullname" . }}-ksm
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "ozone.commonlabels" . | indent 4}}
 spec:
   ports:
   - port: 9874
@@ -26,13 +24,15 @@ spec:
     metadata:
       labels:
         app: {{ template "ozone.fullname" . }}-ksm
+{{ include "ozone.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
         - name: ksm
-          image: flokkr/hadoop:ozone
+          image: flokkr/hadoop:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","ksm"]
           env:
             - name: PROMETHEUSJMX_ENABLED
@@ -46,4 +46,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: hadoopconf
+            name: {{ template "ozone.fullname" . }}-config

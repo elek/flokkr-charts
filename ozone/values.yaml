@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 #replicaCount: 1
+image:
+  tag: ozone
+  pullPolicy: Always
+
 #image:
 #  repository: nginx
 #  tag: stable
