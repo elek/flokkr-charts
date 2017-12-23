@@ -32,8 +32,8 @@ spec:
     spec:
       containers:
         - name: datanode
-          image: flokkr/hadoop-hdfs-datanode:{{ .Values.image.tag }}
-          imagePullPolicy: Always
+          image: {{ .Values.image.repository }}flokkr/hadoop-hdfs-datanode:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           env:
             - name: PROMETHEUSJMX_ENABLED
               value: "true"

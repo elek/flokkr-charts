@@ -10,3 +10,11 @@ export SCM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "
 kubectl port-forward $SCM_POD_NAME 9876:9876
 export KSM_POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "ozone.fullname" . }}-ksm,release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $KSM_POD_NAME 9874:9874
+
+
+2. kubectl proxy
+
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "ozone.fullname" . }}-ksm:web/proxy/
+http://localhost:8001/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "ozone.fullname" . }}-scm:web/proxy/

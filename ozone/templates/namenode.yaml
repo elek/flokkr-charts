@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: namenode
-          image: flokkr/hadoop-hdfs-namenode:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}flokkr/hadoop-hdfs-namenode:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           env:
             - name: ENSURE_NAMENODE_DIR

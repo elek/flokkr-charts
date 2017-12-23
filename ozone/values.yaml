@@ -5,6 +5,7 @@
 image:
   tag: ozone
   pullPolicy: Always
+  repository:
 
 #image:
 #  repository: nginx

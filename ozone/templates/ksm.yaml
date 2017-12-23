@@ -31,10 +31,12 @@ spec:
     spec:
       containers:
         - name: ksm
-          image: flokkr/hadoop:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","ksm"]
           env:
+            - name: ENSURE_KSM_INITIALIZED
+              value: /data/metadata/ksm/current/VERSION            
             - name: PROMETHEUSJMX_ENABLED
               value: "true"
             - name: PROMETHEUSJMX_AGENTOPTS

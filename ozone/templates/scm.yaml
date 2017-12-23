@@ -9,7 +9,7 @@ spec:
   clusterIP: None
   ports:
   - port: 9876
-    name: scm
+    name: web
   selector:
      app: {{ template "ozone.fullname" . }}-scm
 ---
@@ -31,8 +31,8 @@ spec:
     spec:
       containers:
         - name: scm
-          image: flokkr/hadoop:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","scm"]
           env:
             - name: ENSURE_SCM_INITIALIZED
