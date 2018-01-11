@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "cblock.fullname" . }}-iscsi
+  labels:
+    app: {{ template "cblock.fullname" . }}-iscsi
+{{ include "cblock.commonlabels" . | indent 4}}
+spec:
+   type: NodePort
+   ports:
+   - port: 3260
+     name: iscsi
+   selector:
+      app: {{ template "cblock.fullname" . }}-jscsi

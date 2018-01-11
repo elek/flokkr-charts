@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "cblock.fullname" . }}-namenode
+  labels:
+    app: {{ template "cblock.fullname" . }}-namenode
+{{ include "cblock.commonlabels" . | indent 4}}
+spec:
+  ports:
+  - port: 50070
+    name: web
+  clusterIP: None
+  selector:
+     app: {{ template "cblock.fullname" . }}-namenode
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "cblock.fullname" . }}-namenode
+spec:
+  serviceName: {{ template "cblock.fullname" . }}-namenode
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "cblock.fullname" . }}-namenode
+{{ include "cblock.commonlabels" . | indent 8}}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      containers:
+        - name: namenode
+          image: {{ .Values.image.repository }}flokkr/hadoop-hdfs-namenode:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          env:
+            - name: ENSURE_NAMENODE_DIR
+              value: /data/namenode
+            - name: PROMETHEUSJMX_ENABLED
+              value: "true"
+            - name: PROMETHEUSJMX_AGENTOPTS
+              value: port=28942
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "cblock.fullname" . }}-config
