@@ -10,5 +10,6 @@ spec:
    ports:
    - port: 3260
      name: iscsi
+     nodePort: {{ .Values.service.iscsi.NodePort }}
    selector:
       app: {{ template "cblock.fullname" . }}-jscsi
