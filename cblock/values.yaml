@@ -10,6 +10,9 @@ image:
 service:
    iscsi:
       NodePort: 32060
+
+serviceAccount:
+
 #image:
 #  repository: nginx
 #  tag: stable

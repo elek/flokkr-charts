@@ -29,6 +29,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
+{{ if .Values.serviceAccount }}
+      serviceAccount: {{ .Values.serviceAccount }}
+{{ end }}
       containers:
         - name: cblock
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
