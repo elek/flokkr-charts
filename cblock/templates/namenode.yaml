@@ -35,12 +35,7 @@ spec:
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","namenode"]
           env:
-            - name: ENSURE_NAMENODE_DIR
-              value: /data/namenode
-            - name: PROMETHEUSJMX_ENABLED
-              value: "true"
-            - name: PROMETHEUSJMX_AGENTOPTS
-              value: port=28942
+{{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: config
               mountPath: "/opt/hadoop/etc/hadoop"

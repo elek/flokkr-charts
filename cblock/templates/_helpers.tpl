@@ -11,11 +11,16 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
 {{- define "cblock.fullname" -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 
+{{- define "prometheus.jmx" -}}
+- name: PROMETHEUSJMX_ENABLED
+  value: "true"
+- name: PROMETHEUSJMX_AGENTOPTS
+  value: port=28942
+{{- end -}}
 
 
 {{- define "cblock.commonlabels" -}}
