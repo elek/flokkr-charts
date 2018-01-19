@@ -40,7 +40,7 @@ data:
     <property><name>dfs.cblock.jscsi.cblock.server.address</name><value>{{ template "cblock.fullname" . }}-cblock-0.{{ template "cblock.fullname" . }}-cblock</value></property>
     <property><name>dfs.cblock.scm.ipaddress</name><value>{{ template "cblock.fullname" . }}-scm-0.{{ template "cblock.fullname" . }}-scm</value></property>
     <property><name>dfs.cblock.service.leveldb.path</name><value>/data/cb</value></property>
-
-    
+    <property><name>dfs.cblock.short.circuit.io</name><value>true</value></property>
+    <property><name>dfs.cblock.kubernetes.dynamic-provisioner.enabled</name><value>true</value></property>  
     </configuration>
 kind: ConfigMap
