@@ -1,54 +1,58 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "yarn.fullname" . }}-nodemanager
+  name: {{ template "flokkr.fullname" . }}-nodemanager
   labels:
-    app: {{ template "yarn.fullname" . }}-nodemanager
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "flokkr.commonlabels" . | indent 4}}
 spec:
   ports:
-  - port: 9874
+  - port: 8088
     name: web
   clusterIP: None
   selector:
-     app: {{ template "yarn.fullname" . }}-nodemanager
+     app: {{ template "flokkr.fullname" . }}
+     component: nodemanager
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "yarn.fullname" . }}-nodemanager
+  name: {{ template "flokkr.fullname" . }}-nodemanager
+  labels:
+{{ include "flokkr.commonlabels" . | indent 4}}
+    component: nodemanager
 spec:
-  serviceName: {{ template "yarn.fullname" . }}-nodemanager
+  serviceName: {{ template "flokkr.fullname" . }}-nodemanager
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{ template "yarn.fullname" . }}-nodemanager
-        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-        release: {{ .Release.Name }}
-        heritage: {{ .Release.Service }}
+{{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
         - name: nodemanager
-          image: flokkr/hadoop-yarn-nodemanager:{{ .Values.image.tag }}
-          env:
-            - name: CORE-SITE.XML_fs.defaultFS
-              value: {{ .Values.defaultFs }}
-            - name: YARN-SITE.XML_yarn.resourcemanager.hostname
-              value: {{ template "yarn.fullname" . }}-resourcemanager-0.{{ template "yarn.fullname" . }}-resourcemanager
-{{- if .Values.prometheus.enabled }}
-            - name: PROMETHEUSJMX_ENABLED
-              value: "true"
-            - name: PROMETHEUSJMX_AGENTOPTS
-              value: port=28942
-{{- end -}}              
-            {{- range $key, $value := .Values.customEnvs }}
-            - name: {{ $key | quote }}
-              value: {{ $value | quote }}
-            {{- end }}
-
+          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["yarn","nodemanager"]
+          volumeMounts:
+          - name: yarn-site
+            mountPath: /opt/hadoop/etc/hadoop
+          - name: hdfs-site
+            mountPath: /opt/conf/hdfs-site
+      volumes:
+       - name: hdfs-site
+         configMap:
+           name: cblock-config
+           items:
+           - key: hdfs-site.xml
+             path: hdfs-site.xml
+       - name: yarn-site
+         configMap:
+           name: {{ template "flokkr.fullname" . }}-conf
+           items:
+           - key: yarn-site.xml
+             path: yarn-site.xml
+           - key: capacity-scheduler.xml
+             path: capacity-scheduler.xml

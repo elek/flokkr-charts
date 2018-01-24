@@ -1,27 +1,10 @@
-# Default values for ozone.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-#replicaCount: 1
 image:
   tag: latest
-#  repository: nginx
-#  tag: stable
-#  pullPolicy: IfNotPresent
-#service:
-#  name: nginx
-#  type: ClusterIP
-#  externalPort: 80
-#  internalPort: 80
 prometheus:
   enabled: false
 
 defaultFs: hdfs://hdfs-hdfs-namenode-0.hdfs-hdfs-namenode:9000
-ingress:
-  enabled: true
-  hosts:
-    - chart-example.local
-  annotations:
-     traefik.frontend.rule.type: PathPrefixStrip
+
 customEnvs:
   LOG4J.PROPERTIES_log4j.rootLogger: "INFO, stdout"
   LOG4J.PROPERTIES_log4j.appender.stdout: "org.apache.log4j.ConsoleAppender"
