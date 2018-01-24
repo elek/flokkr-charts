@@ -1,19 +1,16 @@
 apiVersion: v1
 metadata:
-  name: {{ template "ozone.fullname" . }}-config
+  name: {{ template "flokkr.fullname" . }}-config
   labels:
-    app: {{ template "ozone.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "flokkr.commonlabels" . | indent 6}}
 data:
   core-site.xml: |-
     <configuration>
-    <property><name>fs.defaultFS</name><value>hdfs://{{ template "ozone.fullname" . }}-namenode-0.{{ template "ozone.fullname" . }}-namenode:9000</value></property>
+      <property><name>fs.defaultFS</name><value>hdfs://{{ template "flokkr.fullname" . }}-namenode-0.{{ template "flokkr.fullname" . }}-namenode:9000</value></property>
     </configuration>
   hdfs-site.xml: |-
     <configuration>
-    <property><name>dfs.namenode.rpc-address</name><value>{{ template "ozone.fullname" . }}-namenode-0.{{ template "ozone.fullname" . }}-namenode:9000</value></property>
+    <property><name>dfs.namenode.rpc-address</name><value>{{ template "flokkr.fullname" . }}-namenode-0.{{ template "flokkr.fullname" . }}-namenode:9000</value></property>
     <property><name>dfs.replication</name><value>3</value></property>
     <property><name>dfs.permissions.superusergroup</name><value>admin</value></property>
     <property><name>dfs.datanode.data.dir</name><value>/data/datanode</value></property>
@@ -28,13 +25,19 @@ data:
     log4j.appender.stdout.layout.ConversionPattern: %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
   ozone-site.xml: |-
     <configuration>
-    <property><name>ozone.scm.block.client.address</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
+    <property><name>ozone.scm.block.client.address</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
     <property><name>ozone.handler.type</name><value>distributed</value></property>
-    <property><name>ozone.ksm.address</name><value>{{ template "ozone.fullname" . }}-ksm-0.{{ template "ozone.fullname" . }}-ksm</value></property>
+    <property><name>ozone.ksm.address</name><value>{{ template "flokkr.fullname" . }}-ksm-0.{{ template "flokkr.fullname" . }}-ksm</value></property>
     <property><name>ozone.enabled</name><value>True</value></property>
     <property><name>ozone.scm.datanode.id</name><value>/data/datanode.id</value></property>
-    <property><name>ozone.scm.client.address</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
+    <property><name>ozone.scm.client.address</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
     <property><name>ozone.metadata.dirs</name><value>/data/metadata</value></property>
-    <property><name>ozone.scm.names</name><value>{{ template "ozone.fullname" . }}-scm-0.{{ template "ozone.fullname" . }}-scm</value></property>
+    <property><name>ozone.scm.names</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
+    <property><name>dfs.cblock.iscsi.advertised.port</name><value>{{ .Values.service.iscsi.NodePort }}</value></property>
+    <property><name>dfs.cblock.jscsi.cblock.server.address</name><value>{{ template "flokkr.fullname" . }}-cblock-0.{{ template "flokkr.fullname" . }}-cblock</value></property>
+    <property><name>dfs.cblock.scm.ipaddress</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
+    <property><name>dfs.cblock.service.leveldb.path</name><value>/data/cb</value></property>
+    <property><name>dfs.cblock.short.circuit.io</name><value>true</value></property>
+    <property><name>dfs.cblock.kubernetes.dynamic-provisioner.enabled</name><value>true</value></property>
     </configuration>
 kind: ConfigMap

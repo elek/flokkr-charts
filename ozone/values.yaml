@@ -7,6 +7,12 @@ image:
   pullPolicy: Always
   repository:
 
+service:
+   iscsi:
+      NodePort: 32060
+
+serviceAccount: cblock
+
 #image:
 #  repository: nginx
 #  tag: stable

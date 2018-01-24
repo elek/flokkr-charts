@@ -1,30 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "ozone.fullname" . }}-scm
+  name: {{ template "flokkr.fullname" . }}-scm
   labels:
-    app: {{ template "ozone.fullname" . }}-scm
-{{ include "ozone.commonlabels" . | indent 4}}
+{{ include "flokkr.commonlabels" . | indent 6}}
 spec:
   clusterIP: None
   ports:
   - port: 9876
     name: web
   selector:
-     app: {{ template "ozone.fullname" . }}-scm
+     app: {{ template "flokkr.fullname" . }}
+     component: scm
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "ozone.fullname" . }}-scm
+  name: {{ template "flokkr.fullname" . }}-scm
 spec:
-  serviceName: {{ template "ozone.fullname" . }}-scm
+  serviceName: {{ template "flokkr.fullname" . }}-scm
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{ template "ozone.fullname" . }}-scm
-{{ include "ozone.commonlabels" . | indent 8}}
+        component: scm
+{{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
@@ -36,11 +36,8 @@ spec:
           args: ["hdfs","scm"]
           env:
             - name: ENSURE_SCM_INITIALIZED
-              value: /data/metadata/scm/current/VERSION
-            - name: PROMETHEUSJMX_ENABLED
-              value: "true"
-            - name: PROMETHEUSJMX_AGENTOPTS
-              value: port=28942
+              value: "/data/metadata/scm/current/VERSION"
+{{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: config
               mountPath: "/opt/hadoop/etc/hadoop"
@@ -48,4 +45,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ template "ozone.fullname" . }}-config
+            name: {{ template "flokkr.fullname" . }}-config
