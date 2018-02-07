@@ -5,11 +5,10 @@ metadata:
   labels:
 #{{ include "flokkr.commonlabels" . | indent 6}}
 spec:
-   type: NodePort
+   clusterIP: {{ .Values.service.iscsi.ClusterIp }}
    ports:
    - port: 3260
      name: iscsi
-     nodePort: {{ .Values.service.iscsi.NodePort }}
    selector:
       app: {{ template "flokkr.fullname" . }}
       component: jscsi

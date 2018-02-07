@@ -10,6 +10,7 @@ image:
 service:
    iscsi:
       NodePort: 32060
+      ClusterIp: 10.96.10.10
 
 serviceAccount: cblock
 

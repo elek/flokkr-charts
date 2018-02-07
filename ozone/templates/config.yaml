@@ -33,7 +33,7 @@ data:
     <property><name>ozone.scm.client.address</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
     <property><name>ozone.metadata.dirs</name><value>/data/metadata</value></property>
     <property><name>ozone.scm.names</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
-    <property><name>dfs.cblock.iscsi.advertised.port</name><value>{{ .Values.service.iscsi.NodePort }}</value></property>
+    <property><name>dfs.cblock.iscsi.advertised.ip</name><value>{{ .Values.service.iscsi.ClusterIp }}</value></property>
     <property><name>dfs.cblock.jscsi.cblock.server.address</name><value>{{ template "flokkr.fullname" . }}-cblock-0.{{ template "flokkr.fullname" . }}-cblock</value></property>
     <property><name>dfs.cblock.scm.ipaddress</name><value>{{ template "flokkr.fullname" . }}-scm-0.{{ template "flokkr.fullname" . }}-scm</value></property>
     <property><name>dfs.cblock.service.leveldb.path</name><value>/data/cb</value></property>
