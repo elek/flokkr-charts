@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "flokkr.fullname" . }}-ksm
+  name: {{ template "flokkr.fullname" . }}-ozone-ksm
   labels:
 {{ include "flokkr.commonlabels" . | indent 6}}
 spec:
@@ -11,26 +11,26 @@ spec:
     name: web
   selector:
      app: {{ template "flokkr.fullname" . }}
-     component: ksm
+     component: ozone-ksm
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "flokkr.fullname" . }}-ksm
+  name: {{ template "flokkr.fullname" . }}-ozone-ksm
 spec:
-  serviceName: {{ template "flokkr.fullname" . }}-ksm
+  serviceName: {{ template "flokkr.fullname" . }}-ozone-ksm
   replicas: 1
   template:
     metadata:
       labels:
-        component: ksm
+        component: ozone-ksm
 {{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
-        - name: ksm
+        - name: ozone-ksm
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","ksm"]

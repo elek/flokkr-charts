@@ -1,40 +1,42 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "flokkr.fullname" . }}-datanode
+  name: {{ template "flokkr.fullname" . }}-quadra-master
   labels:
-{{ include "flokkr.commonlabels" . | indent 6}}
+{{ include "flokkr.commonlabels" . | indent 4}}
 spec:
-  ports:
-  - port: 9874
-    name: web
   clusterIP: None
+  ports:
+  - port: 9876
+    name: web
   selector:
      app: {{ template "flokkr.fullname" . }}
-     component: datanode
+     component: quadra-master
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "flokkr.fullname" . }}-datanode
+  name: {{ template "flokkr.fullname" . }}-quadra-master
 spec:
-  serviceName: {{ template "flokkr.fullname" . }}-datanode
-  replicas: 3
-  podManagementPolicy: Parallel
+  serviceName: {{ template "flokkr.fullname" . }}-quadra-master
+  replicas: 1
   template:
     metadata:
       labels:
-        component: datanode
+        component: quadra-master
 {{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
+{{ if .Values.serviceAccount }}
+      serviceAccount: {{ .Values.serviceAccount }}
+{{ end }}
       containers:
-        - name: datanode
+        - name: quadra-master
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["hdfs","datanode"]
+          args: ["hdfs","cblockserver"]
           env:
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:

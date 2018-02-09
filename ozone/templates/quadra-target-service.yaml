@@ -11,4 +11,4 @@ spec:
      name: iscsi
    selector:
       app: {{ template "flokkr.fullname" . }}
-      component: jscsi
+      component: quadra-target

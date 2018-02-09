@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "flokkr.fullname" . }}-jscsi
+  name: {{ template "flokkr.fullname" . }}-quadra-target
   labels:
 {{ include "flokkr.commonlabels" . | indent 4}}
 spec:
@@ -11,26 +11,26 @@ spec:
     name: web
   selector:
      app: {{ template "flokkr.fullname" . }}
-     component: jscsi
+     component: quadra-target
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "flokkr.fullname" . }}-jscsi
+  name: {{ template "flokkr.fullname" . }}-quadra-target
 spec:
-  serviceName: {{ template "flokkr.fullname" . }}-jscsi
+  serviceName: {{ template "flokkr.fullname" . }}-quadra-target
   replicas: 1
   template:
     metadata:
       labels:
-        component: jscsi
+        component: quadra-target
 {{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
-        - name: jscsi
+        - name: quadra-target
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","jscsi"]
