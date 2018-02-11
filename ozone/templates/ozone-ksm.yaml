@@ -35,6 +35,8 @@ spec:
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","ksm"]
           env:
+            - name: SLEEP_SECONDS
+              value: 30
             - name: ENSURE_KSM_INITIALIZED
               value: /data/metadata/ksm/current/VERSION
 {{ include "prometheus.jmx" . | indent 12}}
