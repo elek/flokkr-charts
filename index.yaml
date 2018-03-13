@@ -2,15 +2,15 @@ apiVersion: v1
 entries:
   ozone:
   - apiVersion: v1
-    created: 2018-02-11T15:15:11.425809619+01:00
+    created: 2018-03-13T21:48:42.80988396+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
-    digest: 9578703633c733a6aa7b809220c78dbc31cc56d27dd330be7aea4022ff951e68
+    digest: ac2db1f4a97ae547a3c0103b0decf2034c0a0649bb456ec28deb6242b218cf10
     name: ozone
     urls:
     - ozone-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
-    created: 2018-02-11T15:15:11.425527525+01:00
+    created: 2018-03-13T21:48:42.809443546+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ec8a36b3fb4725e3cf0a512db74f6462c90a9abe245924b502b3f0c27804ed8f
     name: ozone
@@ -50,4 +50,4 @@ entries:
     urls:
     - yarn-0.1.1.tgz
     version: 0.1.1
-generated: 2018-02-11T15:15:11.425128344+01:00
+generated: 2018-03-13T21:48:42.808852462+01:00
