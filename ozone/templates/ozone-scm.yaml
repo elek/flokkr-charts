@@ -33,7 +33,7 @@ spec:
         - name: ozone-scm
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["hdfs","scm"]
+          args: ["oz","scm"]
           env:
             - name: ENSURE_SCM_INITIALIZED
               value: "/data/metadata/scm/current/VERSION"

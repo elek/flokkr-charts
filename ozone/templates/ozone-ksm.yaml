@@ -33,7 +33,7 @@ spec:
         - name: ozone-ksm
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["hdfs","ksm"]
+          args: ["oz","ksm"]
           env:
             - name: SLEEP_SECONDS
               value: "30"

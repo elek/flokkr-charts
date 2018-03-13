@@ -33,7 +33,7 @@ spec:
         - name: quadra-target
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["hdfs","jscsi"]
+          args: ["oz","jscsi"]
           env:
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:

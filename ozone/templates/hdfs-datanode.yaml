@@ -34,7 +34,7 @@ spec:
         - name: hdfs-datanode
           image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["hdfs","datanode"]
+          args: ["oz","datanode"]
           env:
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
