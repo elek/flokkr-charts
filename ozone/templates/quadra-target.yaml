@@ -1,3 +1,4 @@
+{{ if .Values.component.cblock }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
         - name: quadra-target
-          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["oz","jscsi"]
           env:
@@ -44,3 +45,4 @@ spec:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+{{end}}

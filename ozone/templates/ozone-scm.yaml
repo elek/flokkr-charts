@@ -20,6 +20,9 @@ metadata:
 spec:
   serviceName: {{ template "flokkr.fullname" . }}-ozone-scm
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
   template:
     metadata:
       labels:
@@ -31,7 +34,7 @@ spec:
     spec:
       containers:
         - name: ozone-scm
-          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["oz","scm"]
           env:

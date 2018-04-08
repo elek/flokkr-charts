@@ -1,3 +1,4 @@
+{{ if .Values.component.cblock }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -34,7 +35,7 @@ spec:
 {{ end }}
       containers:
         - name: quadra-master
-          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["oz","cblockserver"]
           env:
@@ -47,3 +48,4 @@ spec:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+{{end}}

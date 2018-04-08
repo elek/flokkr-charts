@@ -1,8 +1,12 @@
 image:
-  tag: ozone
+  tag: &tag ozone
   pullPolicy: Always
-  repository:
+  repository: flokkr/hadoop
 
+component:
+   cblock: false
+   hdsl: true
+   ozone: true
 service:
    iscsi:
       NodePort: 32060
@@ -12,3 +16,11 @@ serviceAccount: cblock
 
 features:
   storageclass: false
+
+keel:
+  policy: force
+  trigger: poll
+  pollSchedule: "@every 3m"
+  images:
+    - repository: image.repository
+      tag: image.tag

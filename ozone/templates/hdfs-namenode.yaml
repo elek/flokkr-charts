@@ -22,6 +22,9 @@ metadata:
 spec:
   serviceName: {{ template "flokkr.fullname" . }}-hdfs-namenode
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
   template:
     metadata:
       labels:
@@ -34,7 +37,7 @@ spec:
     spec:
       containers:
         - name: hdfs-namenode
-          image: {{ .Values.image.repository }}flokkr/hadoop:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","namenode"]
           env:
