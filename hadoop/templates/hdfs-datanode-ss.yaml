@@ -1,0 +1,51 @@
+{{ if not .Values.service.datanode.daemonset }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  labels:
+{{ include "flokkr.commonlabels" . | indent 6}}
+spec:
+  ports:
+  - port: 9874
+    name: web
+  clusterIP: None
+  selector:
+     app: {{ template "flokkr.fullname" . }}
+     component: hdfs-datanode
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "flokkr.fullname" . }}-hdfs-datanode
+spec:
+  serviceName: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        component: hdfs-datanode
+{{ include "flokkr.commonlabels" . | indent 8}}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      containers:
+        - name: hdfs-datanode
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["hdfs","datanode"]
+          env:
+{{ include "prometheus.jmx" . | indent 12}}
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "flokkr.fullname" . }}-config
+{{end}}

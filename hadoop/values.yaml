@@ -1,0 +1,10 @@
+image:
+  tag: &tag latest
+  pullPolicy: Always
+  repository: flokkr/hadoop
+
+service:
+   datanode:
+      daemonset: true
+   nodemanager:
+      daemonset: false

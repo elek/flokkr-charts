@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "flokkr.fullname" . }}-yarn-resourcemanager
+  labels:
+{{ include "flokkr.commonlabels" . | indent 4}}
+spec:
+  ports:
+  - port: 8088
+    name: web
+  clusterIP: None
+  selector:
+     app: {{ template "flokkr.fullname" . }}
+     component: yarn-resourcemanager
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "flokkr.fullname" . }}-yarn-resourcemanager
+spec:
+  serviceName: {{ template "flokkr.fullname" . }}-yarn-resourcemanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+{{ include "flokkr.commonlabels" . | indent 8}}
+        component: yarn-resourcemanager
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      containers:
+        - name: resourcemanager
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["yarn","resourcemanager"]
+          volumeMounts:
+          - name: yarn-site
+            mountPath: /opt/hadoop/etc/hadoop
+      volumes:
+       - name: yarn-site
+         configMap:
+           name: {{ template "flokkr.fullname" . }}-config

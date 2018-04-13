@@ -1,0 +1,31 @@
+{{ if .Values.service.datanode.daemonset }}
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  labels:
+{{ include "flokkr.commonlabels" . | indent 6}}
+spec:
+  template:
+    metadata:
+      labels:
+        component: hdfs-datanode
+{{ include "flokkr.commonlabels" . | indent 8}}
+    spec:
+      containers:
+        - name: hdfs-datanode
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["hdfs","datanode"]
+          env:
+            - name: HADOOP_OPTS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "flokkr.fullname" . }}-config
+{{end}}
