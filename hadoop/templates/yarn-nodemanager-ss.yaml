@@ -33,6 +33,14 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: {{ template "flokkr.fullname" . }}
+                  component: yarn-resourcemanager
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: yarn-nodemanager
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
