@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "flokkr.fullname" . }}
+  labels:
+{{ include "flokkr.commonlabels" . | indent 6}}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+{{ include "flokkr.commonlabels" . | indent 8}}
+    spec:
+      containers:
+        - name: freon
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["ozone","freon"]
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.configmap }}
