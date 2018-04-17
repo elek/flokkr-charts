@@ -16,7 +16,7 @@ data:
     <property><name>dfs.datanode.data.dir</name><value>/data/datanode</value></property>
     <property><name>dfs.namenode.name.dir</name><value>/data/namenode</value></property>
     <property><name>dfs.namenode.http-bind-host</name><value>0.0.0.0</value></property>
-    <property><name>dfs.datanode.plugins</name><value>org.apache.hadoop.ozone.HdslServerPlugin,org.apache.hadoop.ozone.web.ObjectStoreRestPlugin</value></property>
+    <property><name>dfs.datanode.plugins</name><value>org.apache.hadoop.ozone.HddsDatanodeService</value></property>
     <property><name>dfs.namenode.datanode.registration.ip-hostname-check</name><value>false</value></property>
     </configuration>
   log4j.properties: |-

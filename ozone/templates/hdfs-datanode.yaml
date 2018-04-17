@@ -36,7 +36,7 @@ spec:
         - name: hdfs-datanode
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["oz","datanode"]
+          args: ["ozone","datanode"]
           env:
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:

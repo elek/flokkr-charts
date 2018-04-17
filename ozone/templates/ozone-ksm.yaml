@@ -36,7 +36,7 @@ spec:
         - name: ozone-ksm
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["oz","ksm"]
+          args: ["ozone","ksm"]
           env:
             - name: SLEEP_SECONDS
               value: "30"
