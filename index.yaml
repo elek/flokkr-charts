@@ -1,8 +1,17 @@
 apiVersion: v1
 entries:
+  freon:
+  - apiVersion: v1
+    created: 2018-04-17T20:01:25.831306977+02:00
+    description: Freon is a load tester of Apache Hadoop Ozone
+    digest: d2cfbb5c11c5eb29503965426c7abd5dafa45ccbcb2d35e03f80413436502729
+    name: freon
+    urls:
+    - freon-0.2.0.tgz
+    version: 0.2.0
   ozone:
   - apiVersion: v1
-    created: 2018-04-17T20:01:03.983858952+02:00
+    created: 2018-04-17T20:01:25.832138613+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 8c7bb54d9128a5c9d31e95d0ad8486905e6f9bb4c8c12b81c5eca27232a184ca
     name: ozone
@@ -10,7 +19,7 @@ entries:
     - ozone-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v1
-    created: 2018-04-17T20:01:03.983550838+02:00
+    created: 2018-04-17T20:01:25.83187866+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ac2db1f4a97ae547a3c0103b0decf2034c0a0649bb456ec28deb6242b218cf10
     name: ozone
@@ -18,7 +27,7 @@ entries:
     - ozone-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
-    created: 2018-04-17T20:01:03.983243892+02:00
+    created: 2018-04-17T20:01:25.83160184+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ec8a36b3fb4725e3cf0a512db74f6462c90a9abe245924b502b3f0c27804ed8f
     name: ozone
@@ -58,4 +67,4 @@ entries:
     urls:
     - yarn-0.1.1.tgz
     version: 0.1.1
-generated: 2018-04-17T20:01:03.982863489+02:00
+generated: 2018-04-17T20:01:25.831057191+02:00
