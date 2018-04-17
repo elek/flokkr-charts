@@ -2,7 +2,9 @@
 set -x 
 
 helm package ozone/ -d ./charts-repo
-helm package flokkr/ -d ./charts-repo
+helm package freon/ -d ./charts-repo
+helm package hadoop/ -d ./charts-repo
+
 helm repo index ./charts-repo --merge ./charts-repo/index.yaml
 
 cd ./charts-repo
