@@ -58,13 +58,4 @@ entries:
     urls:
     - ozone-0.1.0.tgz
     version: 0.1.0
-  yarn:
-  - apiVersion: v1
-    created: 2018-02-11T14:59:15.431498714+01:00
-    description: A Helm chart for Apache Hadoop Yarn cluster
-    digest: 2849ff3bd292011e62e1d6d90d6d9ea0b4df6cc3f97531a45d8e1d2bbe0c7645
-    name: yarn
-    urls:
-    - yarn-0.1.1.tgz
-    version: 0.1.1
 generated: 2018-04-17T20:01:25.831057191+02:00
