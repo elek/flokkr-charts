@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Full UNSECURE kerberos server for hadoop development
+name: krb5
+version: 0.1.0

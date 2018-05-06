@@ -1,0 +1,4 @@
+image:
+  tag: &tag latest
+  pullPolicy: Always
+  repository: flokkr/krb5
