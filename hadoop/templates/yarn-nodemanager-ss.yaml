@@ -1,3 +1,4 @@
+{{ if .Values.component.yarn}}
 {{ if not .Values.service.nodemanager.daemonset }}
 apiVersion: v1
 kind: Service
@@ -56,4 +57,5 @@ spec:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+{{end}}
 {{end}}

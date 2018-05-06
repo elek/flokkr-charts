@@ -43,11 +43,28 @@ spec:
           env:
             - name: ENSURE_NAMENODE_DIR
               value: /data/namenode
+{{ if .Values.feature.kerberos }}
+            - name: HADOOP_OPTS
+              value: "-Dsun.security.krb5.debug=true"
+            - name: KRB5_TRACE
+              value: "/tmp/kinit.log"
+            - name: LAUNCHER_UPDATE
+              value: "true"
+            - name: LAUNCHER_GITREF
+              value: "origin/master"
+            - name: CONF_DIR
+              value: /tmp
+            - name: KERBEROS_KEYTABS
+              value: nn HTTP
+            - name: KERBEROS_KEYSTORES
+              value: hadoop
+            - name: KERBEROS_SERVER
+              value: krb5-0.krb5
+{{end}}
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: config
               mountPath: "/opt/hadoop/etc/hadoop"
-              readOnly: true
       volumes:
         - name: config
           configMap:

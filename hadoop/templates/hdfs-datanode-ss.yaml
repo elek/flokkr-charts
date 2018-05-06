@@ -39,6 +39,16 @@ spec:
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["hdfs","datanode"]
           env:
+{{ if .Values.feature.kerberos }}
+            - name: CONF_DIR
+              value: /tmp
+            - name: KERBEROS_KEYTABS
+              value: dn HTTP
+            - name: KERBEROS_KEYSTORES
+              value: hadoop
+            - name: KERBEROS_SERVER
+              value: krb5-0.krb5
+{{end}}
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: config

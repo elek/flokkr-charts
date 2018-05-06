@@ -3,6 +3,13 @@ image:
   pullPolicy: Always
   repository: flokkr/hadoop
 
+component:
+   yarn: true
+   hdfs: true
+
+feature:
+   kerberos: false
+
 service:
    datanode:
       daemonset: true

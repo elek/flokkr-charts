@@ -19,7 +19,17 @@ spec:
           args: ["hdfs","datanode"]
           env:
             - name: HADOOP_OPTS
-              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+              value:
+{{ if .Values.feature.kerberos }}
+            - name: CONF_DIR
+              value: /tmp
+            - name: KERBEROS_KEYTABS
+              value: dn HTTP
+            - name: KERBEROS_KEYSTORES
+              value: hadoop
+            - name: KERBEROS_SERVER
+              value: krb5-0.krb5
+{{end}}
           volumeMounts:
             - name: config
               mountPath: "/opt/hadoop/etc/hadoop"

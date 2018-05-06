@@ -1,3 +1,4 @@
+{{ if .Values.component.yarn}}
 {{ if .Values.service.nodemanager.daemonset }}
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -25,4 +26,5 @@ spec:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+{{end}}
 {{end}}

@@ -8,6 +8,11 @@ data:
   core-site.xml: |-
     <configuration>
     <property><name>fs.defaultFS</name><value>hdfs://{{ template "flokkr.fullname" . }}-hdfs-namenode-0.{{ template "flokkr.fullname" . }}-hdfs-namenode:9000</value></property>
+{{ if .Values.feature.kerberos }}
+    <property><name>dfs.data.transfer.protection</name><value>authentication</value></property>
+    <property><name>hadoop.security.authentication</name><value>kerberos</value></property>
+    <property><name>hadoop.security.auth_to_local</name><value>RULE:[2:$1@$0](.*)s/.*/root/</value></property>
+{{end}}
     </configuration>
   mapred-site.xml: |-
     <configuration>
@@ -25,9 +30,26 @@ data:
     <property><name>dfs.namenode.name.dir</name><value>/data/namenode</value></property>
     <property><name>dfs.namenode.http-bind-host</name><value>0.0.0.0</value></property>
     <property><name>dfs.namenode.datanode.registration.ip-hostname-check</name><value>false</value></property>
+
+{{ if .Values.feature.kerberos }}
+    <property><name>dfs.namenode.keytab.file</name><value>/tmp/nn.keytab</value></property>
+    <property><name>dfs.web.authentication.kerberos.keytab</name><value>/tmp/HTTP.keytab</value></property>
+    <property><name>dfs.block.access.token.enable</name><value>true</value></property>
+    <property><name>dfs.block.access.key.update.interval</name><value>5</value></property>
+
+    <property><name>dfs.web.authentication.kerberos.principal</name><value>HTTP/_HOST@EXAMPLE.COM</value></property>
+    <property><name>dfs.datanode.kerberos.principal</name><value>dn/_HOST@EXAMPLE.COM</value></property>
+    <property><name>dfs.namenode.kerberos.principal</name><value>nn/{{ template "flokkr.fullname" . }}-hdfs-namenode-0.{{ template "flokkr.fullname" . }}-hdfs-namenode.default.svc.cluster.local@EXAMPLE.COM</value></property>
+
+    <property><name>dfs.block.access.token.lifetime</name><value>10</value></property>
+    <property><name>dfs.http.policy</name><value>HTTPS_ONLY</value></property>
+    <property><name>dfs.replication</name><value>1</value></property>
+    <property><name>dfs.datanode.keytab.file</name><value>/tmp/dn.keytab</value></property>
+    <property><name>dfs.data.transfer.protection</name><value>authentication</value></property>
+{{end}}
     </configuration>
   log4j.properties: |-
-    log4j.rootLogger: INFO,stdout
+    log4j.rootLogger: TRACE,stdout
     log4j.appender.stdout: org.apache.log4j.ConsoleAppender
     log4j.appender.stdout.layout: org.apache.log4j.PatternLayout
     log4j.appender.stdout.layout.ConversionPattern: %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
@@ -64,4 +86,22 @@ data:
     <property><name>yarn.scheduler.capacity.root.default.acl_administer_queue</name><value>*</value></property>
     <property><name>yarn.scheduler.capacity.resource-calculator</name><value>org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator</value></property>
     </configuration>
+{{ if .Values.feature.kerberos }}
+  ssl-client.xml: |-
+     <configuration>
+     <property><name>ssl.server.keystore.location</name><value>/opt/hadoop/etc/hadoop/hadoop.keystore</value></property>
+     <property><name>ssl.server.truststore.password</name><value>Welcome1</value></property>
+     <property><name>ssl.server.truststore.location</name><value>/tmp/truststore</value></property>
+     <property><name>ssl.server.keystore.keypassword</name><value>Welcome1</value></property>
+     <property><name>ssl.server.keystore.password</name><value>Welcome1</value></property>
+     </configuration>
+  ssl-server.xml: |-
+     <configuration>
+     <property><name>ssl.server.keystore.location</name><value>/tmp/hadoop.keystore</value></property>
+     <property><name>ssl.server.truststore.password</name><value>Welcome1</value></property>
+     <property><name>ssl.server.truststore.location</name><value>/tmp/truststore</value></property>
+     <property><name>ssl.server.keystore.keypassword</name><value>Welcome1</value></property>
+     <property><name>ssl.server.keystore.password</name><value>Welcome1</value></property>
+     </configuration>
+{{end}}
 kind: ConfigMap
