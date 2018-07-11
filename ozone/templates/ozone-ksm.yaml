@@ -1,3 +1,4 @@
+{{ if .Values.component.ozone }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -51,3 +52,4 @@ spec:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+{{end}}
