@@ -31,10 +31,13 @@ spec:
         app: {{ template "flokkr.fullname" . }}
         component: hdfs-namenode
 {{ include "flokkr.commonlabels" . | indent 8}}
+{{ if .Values.features.prometheus }}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
+{{ end }}
     spec:
+      shareProcessNamespace: true
       containers:
         - name: hdfs-namenode
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -48,7 +51,19 @@ spec:
             - name: config
               mountPath: "/opt/hadoop/etc/hadoop"
               readOnly: true
+            - name: temp
+              mountPath: "/tmp"
+{{ if .Values.features.prometheus }}
+        - name: jmxpromo
+          image: flokkr/jmxpromo-sidecar
+          volumeMounts:
+             - name: temp
+               mountPath: "/tmp"
+{{end}}
       volumes:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+        - name: temp
+          emptyDir:
+             medium: Memory
