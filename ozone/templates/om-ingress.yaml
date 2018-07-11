@@ -2,15 +2,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "flokkr.fullname" . }}-ozone-ksm-ingress
+  name: {{ template "flokkr.fullname" . }}-ozone-om-ingress
   annotations:
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
   - http:
       paths:
-      - path: /ksm/
+      - path: /om/
         backend:
-          serviceName: {{ template "flokkr.fullname" . }}-ozone-ksm
+          serviceName: {{ template "flokkr.fullname" . }}-ozone-om
           servicePort: 9874
 {{ end }}

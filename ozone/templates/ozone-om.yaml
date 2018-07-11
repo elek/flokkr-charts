@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "flokkr.fullname" . }}-ozone-ksm
+  name: {{ template "flokkr.fullname" . }}-ozone-om
   labels:
 {{ include "flokkr.commonlabels" . | indent 6}}
 spec:
@@ -12,14 +12,14 @@ spec:
     name: web
   selector:
      app: {{ template "flokkr.fullname" . }}
-     component: ozone-ksm
+     component: ozone-om
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "flokkr.fullname" . }}-ozone-ksm
+  name: {{ template "flokkr.fullname" . }}-ozone-om
 spec:
-  serviceName: {{ template "flokkr.fullname" . }}-ozone-ksm
+  serviceName: {{ template "flokkr.fullname" . }}-ozone-om
   replicas: 1
   updateStrategy:
     type: RollingUpdate
@@ -27,22 +27,22 @@ spec:
   template:
     metadata:
       labels:
-        component: ozone-ksm
+        component: ozone-om
 {{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
       containers:
-        - name: ozone-ksm
+        - name: ozone-om
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["ozone","ksm"]
+          args: ["ozone","om"]
           env:
             - name: SLEEP_SECONDS
               value: "30"
-            - name: ENSURE_KSM_INITIALIZED
-              value: /data/metadata/ksm/current/VERSION
+            - name: ENSURE_OM_INITIALIZED
+              value: /data/metadata/ozoneManager/current/VERSION
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: config
