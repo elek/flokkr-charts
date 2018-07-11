@@ -16,11 +16,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 
+
 {{- define "prometheus.jmx" -}}
+{{ if .Values.features.prometheus }}
 - name: PROMETHEUSJMX_ENABLED
   value: "true"
 - name: PROMETHEUSJMX_AGENTOPTS
   value: port=28942
+{{ end }}
 {{- end -}}
 
 

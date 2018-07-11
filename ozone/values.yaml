@@ -16,6 +16,7 @@ serviceAccount: cblock
 
 features:
   storageclass: false
+  prometheus: true
 
 keel:
   policy: force
