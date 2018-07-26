@@ -18,6 +18,8 @@ data:
     <property><name>dfs.namenode.http-bind-host</name><value>0.0.0.0</value></property>
     <property><name>dfs.datanode.plugins</name><value>org.apache.hadoop.ozone.HddsDatanodeService</value></property>
     <property><name>dfs.namenode.datanode.registration.ip-hostname-check</name><value>false</value></property>
+    <property><name>rpc.metrics.quantile.enable</name><value>true</value></property>
+    <property><name>rpc.metrics.percentiles.intervals</name><value>60,300</value></property>   
     </configuration>
   log4j.properties: |-
     log4j.rootLogger: INFO, stdout
