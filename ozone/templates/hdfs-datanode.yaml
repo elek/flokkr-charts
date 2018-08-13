@@ -19,7 +19,7 @@ metadata:
   name: {{ template "flokkr.fullname" . }}-hdfs-datanode
 spec:
   serviceName: {{ template "flokkr.fullname" . }}-hdfs-datanode
-  replicas: 3
+  replicas: {{ .Values.services.datanode.replicas }}
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel

@@ -19,6 +19,10 @@ features:
   prometheus: true
   configreload: true
 
+services:
+   datanode:
+      replicas: 3
+
 config:
   ozoneSite:
     ozone.handler.type: distributed
