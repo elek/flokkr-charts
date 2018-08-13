@@ -1,7 +1,11 @@
-replicaCount: 1
+
 image:
   tag: &tag ozone
   pullPolicy: Always
   repository: flokkr/hadoop
 resources: {}
 configmap: unknown
+
+services:
+   freon:
+      replicas: 3

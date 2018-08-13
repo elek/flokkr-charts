@@ -5,7 +5,7 @@ metadata:
   labels:
 {{ include "flokkr.commonlabels" . | indent 6}}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.services.freon.replicas }}
   template:
     metadata:
       labels:
