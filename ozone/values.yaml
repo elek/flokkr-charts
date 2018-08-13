@@ -17,6 +17,33 @@ serviceAccount: cblock
 features:
   storageclass: false
   prometheus: true
+  configreload: true
+
+config:
+  ozoneSite:
+    ozone.handler.type: distributed
+    ozone.enabled: True
+    ozone.scm.datanode.id: /data/datanode.id
+    ozone.metadata.dirs: /data/metadata
+    dfs.cblock.service.leveldb.path: /data/cb
+    dfs.cblock.short.circuit.io: true
+    dfs.cblock.kubernetes.dynamic-provisioner.enabled: true
+  hdfsSite:
+    dfs.replication: 3
+    dfs.permissions.superusergroup: admin
+    dfs.datanode.data.dir: /data/datanode
+    dfs.namenode.name.dir: /data/namenode
+    dfs.namenode.http-bind-host: 0.0.0.0
+    dfs.datanode.plugins: org.apache.hadoop.ozone.HddsDatanodeService
+    dfs.namenode.datanode.registration.ip-hostname-check: false
+    rpc.metrics.quantile.enable: true
+    rpc.metrics.percentiles.intervals: 60,300
+  log4j:
+    log4j.rootLogger: "INFO, stdout"
+    log4j.appender.stdout: org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout: org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+
 
 keel:
   policy: force

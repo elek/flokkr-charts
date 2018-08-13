@@ -33,6 +33,23 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
+      serviceAccountName: {{ template "flokkr.fullname" . }}-configreloader
+      initContainers:
+        - name: ozone-init
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["ozone","version"]
+          env:
+            - name: ENSURE_OM_INITIALIZED
+              value: /data/metadata/ozoneManager/current/VERSION
+            - name: LAUNCHER_UPDATE
+              value: "true"
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+            - name: data
+              mountPath: /data
       containers:
         - name: ozone-om
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -41,15 +58,21 @@ spec:
           env:
             - name: SLEEP_SECONDS
               value: "30"
-            - name: ENSURE_OM_INITIALIZED
-              value: /data/metadata/ozoneManager/current/VERSION
+            - name: KUBERNETES_CONFIGMAP_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: KUBERNETES_CONFIGMAP
+              value: {{ template "flokkr.fullname" . }}-config
 {{ include "prometheus.jmx" . | indent 12}}
           volumeMounts:
-            - name: config
-              mountPath: "/opt/hadoop/etc/hadoop"
-              readOnly: true
+            - name: data
+              mountPath: /data
+            # - name: config
+            #   mountPath: "/opt/hadoop/etc/hadoop"
+            #   readOnly: true
       volumes:
         - name: config
           configMap:
             name: {{ template "flokkr.fullname" . }}-config
+        - name: data
+          emptyDir: {}
 {{end}}
