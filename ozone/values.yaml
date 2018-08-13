@@ -4,9 +4,9 @@ image:
   repository: flokkr/hadoop
 
 component:
-   cblock: false
    hdsl: true
    ozone: true
+   
 service:
    iscsi:
       NodePort: 32060
