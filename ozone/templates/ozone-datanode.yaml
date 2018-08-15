@@ -32,18 +32,15 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "28942"
     spec:
+      serviceAccountName: {{ template "flokkr.fullname" . }}-configreloader
       containers:
         - name: hdfs-datanode
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["ozone","datanode"]
           env:
+            - name: KUBERNETES_CONFIGMAP_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: KUBERNETES_CONFIGMAP
+              value: {{ template "flokkr.fullname" . }}-config
 {{ include "prometheus.jmx" . | indent 12}}
-          volumeMounts:
-            - name: config
-              mountPath: "/opt/hadoop/etc/hadoop"
-              readOnly: true
-      volumes:
-        - name: config
-          configMap:
-            name: {{ template "flokkr.fullname" . }}-config
