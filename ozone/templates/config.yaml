@@ -28,8 +28,6 @@ data:
     <property><name>ozone.om.address</name><value>{{ template "flokkr.fullname" . }}-ozone-om-0.{{ template "flokkr.fullname" . }}-ozone-om</value></property>
     <property><name>ozone.scm.client.address</name><value>{{ template "flokkr.fullname" . }}-ozone-scm-0.{{ template "flokkr.fullname" . }}-ozone-scm</value></property>
     <property><name>ozone.scm.names</name><value>{{ template "flokkr.fullname" . }}-ozone-scm-0.{{ template "flokkr.fullname" . }}-ozone-scm</value></property>
-    <property><name>dfs.cblock.iscsi.advertised.ip</name><value>{{ .Values.service.iscsi.ClusterIp }}</value></property>
-    <property><name>dfs.cblock.jscsi.cblock.server.address</name><value>{{ template "flokkr.fullname" . }}-quadra-master-0.{{ template "flokkr.fullname" . }}-quadra-master</value></property>
     <property><name>dfs.cblock.scm.ipaddress</name><value>{{ template "flokkr.fullname" . }}-ozone-scm-0.{{ template "flokkr.fullname" . }}-ozone-scm</value></property>
     {{- range $key, $value := .Values.config.ozoneSite }}
       <property><name>{{ $key }}</name><value>{{ $value }}</value></property>
