@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   freon:
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.213351886+02:00
+    created: 2018-08-15T16:37:43.33160378+02:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: a27228bc9eb0395d39aaa39120d43f6be9eb231ec909e5e4023d41e51f012316
     name: freon
@@ -10,7 +10,7 @@ entries:
     - freon-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.213156965+02:00
+    created: 2018-08-15T16:37:43.331353485+02:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 50d344acc7b4cfe32cec09498bbc372551974730b3b75184c274c5d3510c3877
     name: freon
@@ -19,7 +19,7 @@ entries:
     version: 0.2.0
   hadoop:
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.214018378+02:00
+    created: 2018-08-15T16:37:43.33218353+02:00
     description: A Helm chart for Apache Hadoop Hdfs cluster
     digest: 33a29019a12904cc3d81954375e2f876e8b34898124aa718560245a093a36dc4
     name: hadoop
@@ -27,7 +27,7 @@ entries:
     - hadoop-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.21372387+02:00
+    created: 2018-08-15T16:37:43.331866193+02:00
     description: A Helm chart for Apache Hadoop Hdfs cluster
     digest: 20f92740d33800a039b2e66e313c363fe1573bfb9b37e3b6e1a673e330dcccc0
     name: hadoop
@@ -36,7 +36,7 @@ entries:
     version: 0.1.1
   krb5:
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.214308275+02:00
+    created: 2018-08-15T16:37:43.33234849+02:00
     description: Full UNSECURE kerberos server for hadoop development
     digest: ff5ede7401fe96bd1af7ba19d059df165cc814640cd989bab757ba555f4a70f2
     name: krb5
@@ -45,7 +45,15 @@ entries:
     version: 0.1.0
   ozone:
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.217981419+02:00
+    created: 2018-08-15T16:37:43.335350603+02:00
+    description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
+    digest: 04d4c1cc1b7950420f58f9e7a296127fee02e501a298c19c162ffd8e601ee867
+    name: ozone
+    urls:
+    - ozone-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v1
+    created: 2018-08-15T16:37:43.334802704+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 5c1d7f40706f6f57a0024dac8c9248935cc67b1c1f329a2a6980186e684d15f1
     name: ozone
@@ -53,7 +61,7 @@ entries:
     - ozone-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.217358719+02:00
+    created: 2018-08-15T16:37:43.334221379+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: b0a811db09bbc58fdf7b48d18b3412edcbf4ba6cd32901d3d738c106db0d0a81
     name: ozone
@@ -61,7 +69,7 @@ entries:
     - ozone-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.21686545+02:00
+    created: 2018-08-15T16:37:43.333925057+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 11817f93cb41a5129255981d7405f0dab06c7af3191b9059102673eb5b6cce98
     name: ozone
@@ -69,7 +77,7 @@ entries:
     - ozone-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.216359078+02:00
+    created: 2018-08-15T16:37:43.333585472+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: fc4228097b56b1e1f1cf0fc0d7a6544011f805dd7ba0b5cd665ca53b1a21390c
     name: ozone
@@ -77,7 +85,7 @@ entries:
     - ozone-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.2158723+02:00
+    created: 2018-08-15T16:37:43.333289388+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 607640d97ccf35b354a2ed7e7fdc7af51ffa344097e154841a5d586be66372e5
     name: ozone
@@ -85,7 +93,7 @@ entries:
     - ozone-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.215288254+02:00
+    created: 2018-08-15T16:37:43.332954922+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ac2db1f4a97ae547a3c0103b0decf2034c0a0649bb456ec28deb6242b218cf10
     name: ozone
@@ -93,7 +101,7 @@ entries:
     - ozone-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
-    created: 2018-08-15T16:12:20.214705483+02:00
+    created: 2018-08-15T16:37:43.332621829+02:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ec8a36b3fb4725e3cf0a512db74f6462c90a9abe245924b502b3f0c27804ed8f
     name: ozone
@@ -124,4 +132,4 @@ entries:
     urls:
     - ozone-0.1.0.tgz
     version: 0.1.0
-generated: 2018-08-15T16:12:20.212737658+02:00
+generated: 2018-08-15T16:37:43.331026951+02:00
