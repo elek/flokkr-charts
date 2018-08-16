@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "flokkr.fullname" . }}-hdfs-namenode
+  labels:
+{{ include "flokkr.commonlabels" . | indent 6}}
+spec:
+  clusterIP: None
+  ports:
+  - port: 9874
+    name: web
+  selector:
+     app: {{ template "flokkr.fullname" . }}
+     component: hdfs-namenode
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "flokkr.fullname" . }}-hdfs-namenode
+spec:
+  serviceName: {{ template "flokkr.fullname" . }}-hdfs-namenode
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        component: hdfs-namenode
+{{ include "flokkr.commonlabels" . | indent 8}}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "28942"
+    spec:
+      serviceAccountName: {{ template "flokkr.fullname" . }}-configreloader
+      initContainers:
+        - name: hdfs-init
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["ozone","version"]
+          env:
+            - name: ENSURE_NAMENODE_DIR
+              value: /data/namenode
+          volumeMounts:
+            - name: config
+              mountPath: "/opt/hadoop/etc/hadoop"
+              readOnly: true
+            - name: data
+              mountPath: /data
+      containers:
+        - name: hdfs-namenode
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
+          args: ["hdfs","namenode"]
+          env:
+            - name: SLEEP_SECONDS
+              value: "30"
+            - name: KUBERNETES_CONFIGMAP_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: KUBERNETES_CONFIGMAP
+              value: {{ template "flokkr.fullname" . }}-config
+{{ include "prometheus.jmx" . | indent 12}}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "flokkr.fullname" . }}-config
+        - name: data
+          emptyDir: {}
