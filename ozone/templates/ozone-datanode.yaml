@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  name: {{ template "flokkr.fullname" . }}-ozone-datanode
   labels:
 {{ include "flokkr.commonlabels" . | indent 6}}
 spec:
@@ -11,14 +11,14 @@ spec:
   clusterIP: None
   selector:
      app: {{ template "flokkr.fullname" . }}
-     component: hdfs-datanode
+     component: ozone-datanode
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  name: {{ template "flokkr.fullname" . }}-ozone-datanode
 spec:
-  serviceName: {{ template "flokkr.fullname" . }}-hdfs-datanode
+  serviceName: {{ template "flokkr.fullname" . }}-ozone-datanode
   replicas: {{ .Values.services.datanode.replicas }}
   updateStrategy:
     type: RollingUpdate
@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       labels:
-        component: hdfs-datanode
+        component: ozone-datanode
 {{ include "flokkr.commonlabels" . | indent 8}}
       annotations:
         prometheus.io/scrape: "true"
@@ -34,7 +34,7 @@ spec:
     spec:
       serviceAccountName: {{ template "flokkr.fullname" . }}-configreloader
       containers:
-        - name: hdfs-datanode
+        - name: ozone-datanode
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
           args: ["ozone","datanode"]

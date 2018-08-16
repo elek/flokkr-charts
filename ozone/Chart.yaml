@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
 name: ozone
-version: 0.6.0
+version: 0.6.1
