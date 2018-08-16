@@ -17,23 +17,6 @@ entries:
     urls:
     - freon-0.2.0.tgz
     version: 0.2.0
-  hadoop:
-  - apiVersion: v1
-    created: 2018-08-15T16:37:43.33218353+02:00
-    description: A Helm chart for Apache Hadoop Hdfs cluster
-    digest: 33a29019a12904cc3d81954375e2f876e8b34898124aa718560245a093a36dc4
-    name: hadoop
-    urls:
-    - hadoop-0.2.1.tgz
-    version: 0.2.1
-  - apiVersion: v1
-    created: 2018-08-15T16:37:43.331866193+02:00
-    description: A Helm chart for Apache Hadoop Hdfs cluster
-    digest: 20f92740d33800a039b2e66e313c363fe1573bfb9b37e3b6e1a673e330dcccc0
-    name: hadoop
-    urls:
-    - hadoop-0.1.1.tgz
-    version: 0.1.1
   krb5:
   - apiVersion: v1
     created: 2018-08-15T16:37:43.33234849+02:00
