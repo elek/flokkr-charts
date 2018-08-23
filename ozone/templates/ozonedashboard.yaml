@@ -78,7 +78,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "rate(Hadoop_StorageContainerManager_AllocateScmBlockNumOps[5m])",
+                "expr": "rate(Hadoop_StorageContainerManager_AllocateScmBlockNumOps{release=\"{{ template "flokkr.fullname" . }}\"}[5m])",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "refId": "A"
@@ -161,7 +161,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "rate(Hadoop_OzoneManager_NumKeyAllocate[60s])",
+                "expr": "rate(Hadoop_OzoneManager_NumKeyAllocate{release=\"{{ template "flokkr.fullname" . }}\"}[60s])",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "",
@@ -245,7 +245,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_StorageContainerManager_AllocateScmBlockNumOps",
+                "expr": "Hadoop_StorageContainerManager_AllocateScmBlockNumOps{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "refId": "A"
@@ -328,7 +328,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_OzoneManager_NumKeyAllocate",
+                "expr": "Hadoop_OzoneManager_NumKeyAllocate{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "",
@@ -412,14 +412,14 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_StorageContainerManager_RpcProcessingTimeAvgTime",
+                "expr": "Hadoop_StorageContainerManager_RpcProcessingTimeAvgTime{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "SCM {{"{{"}}name{{"}}"}}",
                 "refId": "A"
               },
               {
-                "expr": "Hadoop_OzoneManager_RpcProcessingTimeAvgTime",
+                "expr": "Hadoop_OzoneManager_RpcProcessingTimeAvgTime{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "OM {{"{{"}}name{{"}}"}}",
@@ -503,14 +503,14 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_StorageContainerManager_RpcQueueTimeAvgTime",
+                "expr": "Hadoop_StorageContainerManager_RpcQueueTimeAvgTime{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "SCM {{"{{"}}name{{"}}"}}",
                 "refId": "A"
               },
               {
-                "expr": "Hadoop_OzoneManager_RpcQueueTimeAvgTime",
+                "expr": "Hadoop_OzoneManager_RpcQueueTimeAvgTime{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "OM {{"{{"}}name{{"}}"}}",
@@ -594,14 +594,14 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "rate(Hadoop_StorageContainerManager_RpcProcessingTimeNumOps[3m])",
+                "expr": "rate(Hadoop_StorageContainerManager_RpcProcessingTimeNumOps{release=\"{{ template "flokkr.fullname" . }}\"}[3m])",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "SCM {{"{{"}}name{{"}}"}}",
                 "refId": "A"
               },
               {
-                "expr": "rate(Hadoop_OzoneManager_RpcProcessingTimeNumOps[3m])",
+                "expr": "rate(Hadoop_OzoneManager_RpcProcessingTimeNumOps{release=\"{{ template "flokkr.fullname" . }}\"}[3m])",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "OM {{"{{"}}name{{"}}"}}",
@@ -698,7 +698,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_Ozone_BYTES_WRITTEN{dbName=~\"scm.*|om.*\"}",
+                "expr": "Hadoop_Ozone_BYTES_WRITTEN{dbName=~\"scm.*|om.*\",release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}dbName{{"}}"}}",
@@ -782,7 +782,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_Ozone_BYTES_READ{dbName=~\"scm.*|om.*\"}",
+                "expr": "Hadoop_Ozone_BYTES_READ{dbName=~\"scm.*|om.*\",release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}dbName{{"}}"}}",
@@ -866,7 +866,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_Ozone_DB_WRITE_AVERAGE{dbName=~\"scm.*|om.*\"}",
+                "expr": "Hadoop_Ozone_DB_WRITE_AVERAGE{dbName=~\"scm.*|om.*\",release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}dbName{{"}}"}}",
@@ -950,7 +950,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_Ozone_DB_GET_AVERAGE{dbName=~\"scm.*|om.*\"}",
+                "expr": "Hadoop_Ozone_DB_GET_AVERAGE{dbName=~\"scm.*|om.*\",release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}dbName{{"}}"}}",
@@ -1047,7 +1047,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_HddsDatanode_bytesWriteChunk",
+                "expr": "Hadoop_HddsDatanode_bytesWriteChunk{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}instance{{"}}"}}",
@@ -1131,7 +1131,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_HddsDatanode_numWriteChunk",
+                "expr": "Hadoop_HddsDatanode_numWriteChunk{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}instance{{"}}"}}",
@@ -1215,7 +1215,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_HddsDatanode_bytesPutKey",
+                "expr": "Hadoop_HddsDatanode_bytesPutKey{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}instance{{"}}"}}",
@@ -1299,7 +1299,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_HddsDatanode_bytesPutKey",
+                "expr": "Hadoop_HddsDatanode_bytesPutKey{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "legendFormat": "{{"{{"}}instance{{"}}"}}",
@@ -1396,7 +1396,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "java_lang_Memory_HeapMemoryUsage_used",
+                "expr": "java_lang_Memory_HeapMemoryUsage_used{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "hide": false,
                 "instant": false,
@@ -1483,7 +1483,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "java_lang_Memory_NonHeapMemoryUsage_used",
+                "expr": "java_lang_Memory_NonHeapMemoryUsage_used{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "hide": false,
                 "instant": false,
@@ -1571,7 +1571,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "rate(java_lang_GarbageCollector_CollectionCount[10m])",
+                "expr": "rate(java_lang_GarbageCollector_CollectionCount{release=\"{{ template "flokkr.fullname" . }}\"}[10m])",
                 "format": "time_series",
                 "intervalFactor": 1,
                 "refId": "A"
@@ -1654,7 +1654,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "sum(jvm_gc_collection_seconds_sum) by (instance)",
+                "expr": "sum(jvm_gc_collection_seconds_sum{release=\"{{ template "flokkr.fullname" . }}\"}) by (instance)",
                 "format": "time_series",
                 "instant": false,
                 "intervalFactor": 1,
@@ -1753,7 +1753,7 @@ data:
             "steppedLine": false,
             "targets": [
               {
-                "expr": "Hadoop_SCMNodeManager_NodeCount",
+                "expr": "Hadoop_SCMNodeManager_NodeCount{release=\"{{ template "flokkr.fullname" . }}\"}",
                 "format": "time_series",
                 "groupBy": [
                   {
