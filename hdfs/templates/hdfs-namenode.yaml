@@ -7,7 +7,7 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - port: 9874
+  - port: 9870
     name: web
   selector:
      app: {{ template "flokkr.fullname" . }}
@@ -37,7 +37,7 @@ spec:
         - name: hdfs-init
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["ozone","version"]
+          args: ["hadoop","version"]
           env:
             - name: ENSURE_NAMENODE_DIR
               value: /data/namenode
