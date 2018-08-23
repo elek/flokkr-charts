@@ -13,6 +13,8 @@ features:
   prometheus: true
   grafana: true
 
+env: {}
+
 services:
    datanode:
       replicas: 3

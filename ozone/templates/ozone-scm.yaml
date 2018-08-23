@@ -60,7 +60,8 @@ spec:
               value: {{ .Release.Namespace }}
             - name: KUBERNETES_CONFIGMAP
               value: {{ template "flokkr.fullname" . }}-config
-{{ include "prometheus.jmx" . | indent 12}}
+{{- include "custom.env" . | indent 12}}
+{{- include "prometheus.jmx" . | indent 12}}
           volumeMounts:
             - name: data
               mountPath: /data

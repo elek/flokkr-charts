@@ -16,6 +16,12 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 
+{{- define "custom.env" -}}
+{{- range $key, $value := .Values.env }}
+- name: {{ $key }}
+  value: {{ $value }}
+{{- end -}}
+{{- end -}}
 
 {{- define "prometheus.jmx" -}}
 {{ if .Values.features.prometheus }}
