@@ -19,7 +19,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- define "custom.env" -}}
 {{- range $key, $value := .Values.env }}
 - name: {{ $key }}
-  value: {{ $value }}
+  value: "{{ $value }}"
 {{- end -}}
 {{- end -}}
 

@@ -1,4 +1,4 @@
 apiVersion: v1
 description: Freon is a load tester of Apache Hadoop Ozone
 name: freon
-version: 0.2.1
+version: 0.2.2
