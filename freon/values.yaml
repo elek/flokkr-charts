@@ -4,8 +4,10 @@ image:
   pullPolicy: Always
   repository: flokkr/hadoop
 resources: {}
-configmap: unknown
 
 services:
    freon:
       replicas: 3
+
+dependencies:
+   ozone: unknown
