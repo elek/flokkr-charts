@@ -1,0 +1,7 @@
+image:
+  tag: &tag latest
+  pullPolicy: Always
+  repository: flokkr/zeppelin
+
+features:
+  prometheus: true
