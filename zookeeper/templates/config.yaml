@@ -1,0 +1,18 @@
+apiVersion: v1
+metadata:
+  name: {{ template "flokkr.fullname" . }}-config
+  labels:
+{{ include "flokkr.commonlabels" . | indent 6}}
+data:
+  log4j.properties: |-
+    {{- range $key, $value := .Values.config.log4j }}
+      {{ $key }}: {{ $value }}
+    {{- end }}
+  zoo.cfg: |-
+    {{- range $key, $value := .Values.config.zoo }}
+      {{ $key }}={{ $value }}
+    {{- end }}
+{{- range $i, $sequence :=  until 3 }}
+      server.{{ $sequence }}={{ template "flokkr.fullname" $ }}-zookeeper-{{ $sequence }}.{{ template "flokkr.fullname" $ }}-zookeeper:2888:3888
+{{- end }}
+kind: ConfigMap

@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Simple Apache Zookeeper chart
+name: zookeeper
+version: 0.1.0

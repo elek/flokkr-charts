@@ -1,44 +1,26 @@
 image:
-  tag: &tag ozone
+  tag: &tag latest
   pullPolicy: Always
-  repository: flokkr/hadoop
-
-component:
-   hdsl: true
-   ozone: true
-
-serviceAccount: cblock
+  repository: flokkr/zookeeper
 
 features:
   prometheus: true
-  grafana: true
 
 env: {}
 
 services:
-   datanode:
+   zookeeper:
       replicas: 3
 
 config:
-  coreSite: {}
-  ozoneSite:
-    ozone.enabled: True
-    ozone.scm.datanode.id: /data/datanode.id
-    ozone.metadata.dirs: /data/metadata
-    rpc.metrics.quantile.enable: true
-    rpc.metrics.percentiles.intervals: 60,300
-  hdfsSite: {}
+  zoo:
+    tickTime: 2000
+    dataDir: /data/zookeeper
+    clientPort: 2181
+    initLimit: 5
+    syncLimit: 2    
   log4j:
     log4j.rootLogger: "INFO, stdout"
     log4j.appender.stdout: org.apache.log4j.ConsoleAppender
     log4j.appender.stdout.layout: org.apache.log4j.PatternLayout
     log4j.appender.stdout.layout.ConversionPattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
-
-
-keel:
-  policy: force
-  trigger: poll
-  pollSchedule: "@every 3m"
-  images:
-    - repository: image.repository
-      tag: image.tag
