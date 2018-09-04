@@ -15,7 +15,10 @@ spec:
         - name: freon
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ default "Always" .Values.image.pullPolicy }}
-          args: ["ozone","freon"]
+          args:
+{{- range $i, $arg := .Values.services.freon.args }}
+             - "{{$arg}}"
+{{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
