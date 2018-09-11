@@ -8,8 +8,12 @@ resources: {}
 services:
    freon:
       replicas: 3
-      args: ["ozone", "freon", "-ratis", "3"]
-
+      args: 
+        - ozone
+        - freon
+        - pk
+        - --factor=THREE 
+        - --replicationType=RATIS
 
 dependencies:
    ozone: unknown
