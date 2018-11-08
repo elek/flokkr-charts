@@ -2,16 +2,16 @@ apiVersion: v1
 entries:
   flokkr:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.498705696+01:00
-    description: Flokkr operator and control-tower
-    digest: 5d835fd16f2d59d56cb958b45d92f34ed400283b9b60cb30d7fb50425834f186
+    created: 2018-11-08T12:14:36.050201843+01:00
+    description: Flokkr control-tower (ui)
+    digest: 29f56712f50b5075ac0eef7ea2126ee01c169829f9ac456f9274651398e253e0
     name: flokkr
     urls:
     - flokkr-0.1.0.tgz
     version: 0.1.0
   freon:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499853827+01:00
+    created: 2018-11-08T12:14:36.052241167+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 548c90c3565060c53cb4a170f6d8788279d2995092b506f11a42c2c5d662c2d2
     name: freon
@@ -19,7 +19,7 @@ entries:
     - freon-0.2.6.tgz
     version: 0.2.6
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499693376+01:00
+    created: 2018-11-08T12:14:36.051971845+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: b2bf501309b9920438629b3f3c750aa416200d0eef8201a68db6ce5f4e4059e5
     name: freon
@@ -27,7 +27,7 @@ entries:
     - freon-0.2.5.tgz
     version: 0.2.5
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499534336+01:00
+    created: 2018-11-08T12:14:36.051716645+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 78c8a37d22f0a1eee57930544e3fdab5e6479c60351b0423fb722c9a99bf0cce
     name: freon
@@ -35,7 +35,7 @@ entries:
     - freon-0.2.4.tgz
     version: 0.2.4
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499356053+01:00
+    created: 2018-11-08T12:14:36.051455218+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: d2a33792ecab9d3a75a9fecc8679d0a7c1dd0174e53329de182ad3f99ba42657
     name: freon
@@ -43,7 +43,7 @@ entries:
     - freon-0.2.3.tgz
     version: 0.2.3
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499183967+01:00
+    created: 2018-11-08T12:14:36.05118571+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 53b081d5e11468bb0c499d6668c1bd888b6ae479eecd0329b468830080702af6
     name: freon
@@ -51,7 +51,7 @@ entries:
     - freon-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.499029009+01:00
+    created: 2018-11-08T12:14:36.05076622+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 3b017d463c8a170487fa9f800d17a9e44615341f832d62d10834679d29d72458
     name: freon
@@ -59,7 +59,7 @@ entries:
     - freon-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.498870143+01:00
+    created: 2018-11-08T12:14:36.050492772+01:00
     description: Freon is a load tester of Apache Hadoop Ozone
     digest: 50d344acc7b4cfe32cec09498bbc372551974730b3b75184c274c5d3510c3877
     name: freon
@@ -68,7 +68,7 @@ entries:
     version: 0.2.0
   grafana:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.500041434+01:00
+    created: 2018-11-08T12:14:36.052538127+01:00
     description: A simplified grafana dashboard
     digest: 16ea881cbd7313a07b6567607661ccdeac99b6ef0ee22eba9752c79cb1e9bb50
     name: grafana
@@ -77,7 +77,7 @@ entries:
     version: 0.1.0
   hdfs:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.500476473+01:00
+    created: 2018-11-08T12:14:36.053299454+01:00
     description: A Helm chart for Apache Hadoop HDFS
     digest: ae607268050a7880f461ed5aa182a2e7095133e5d3d236bcfd1c465b4dc69e7d
     name: hdfs
@@ -85,7 +85,7 @@ entries:
     - hdfs-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.500246073+01:00
+    created: 2018-11-08T12:14:36.052912622+01:00
     description: A Helm chart for Apache Hadoop HDFS
     digest: 1dd27e2efeea94ba7f44985fcf12c9d01c4e44004b28a812c789371bd8550e19
     name: hdfs
@@ -94,7 +94,7 @@ entries:
     version: 0.1.0
   krb5:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.500608678+01:00
+    created: 2018-11-08T12:14:36.05350733+01:00
     description: Full UNSECURE kerberos server for hadoop development
     digest: ff5ede7401fe96bd1af7ba19d059df165cc814640cd989bab757ba555f4a70f2
     name: krb5
@@ -103,7 +103,7 @@ entries:
     version: 0.1.0
   operator:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.500750167+01:00
+    created: 2018-11-08T12:14:36.053780816+01:00
     description: Flokkr operator
     digest: bb2f04b1170536b0f7cb0c3309576fe7bd3504a4cce3ef8083af3ac8928783cd
     name: operator
@@ -112,7 +112,7 @@ entries:
     version: 0.1.0
   ozone:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.505917394+01:00
+    created: 2018-11-08T12:14:36.059701501+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 383510a97fcb99415d39bd538b4286c884f8eddf61ae5630c948d16f297b1866
     name: ozone
@@ -120,7 +120,7 @@ entries:
     - ozone-0.6.2.tgz
     version: 0.6.2
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.505359142+01:00
+    created: 2018-11-08T12:14:36.058400877+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: da6d46c5ae4a6bde2f64251cf5e05820964b596847b7eed0e7d954c50adb2de6
     name: ozone
@@ -128,7 +128,7 @@ entries:
     - ozone-0.6.1.tgz
     version: 0.6.1
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.503050514+01:00
+    created: 2018-11-08T12:14:36.057566139+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 5c1d7f40706f6f57a0024dac8c9248935cc67b1c1f329a2a6980186e684d15f1
     name: ozone
@@ -136,7 +136,7 @@ entries:
     - ozone-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.502494722+01:00
+    created: 2018-11-08T12:14:36.056677317+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: b0a811db09bbc58fdf7b48d18b3412edcbf4ba6cd32901d3d738c106db0d0a81
     name: ozone
@@ -144,7 +144,7 @@ entries:
     - ozone-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.502207485+01:00
+    created: 2018-11-08T12:14:36.056173074+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 11817f93cb41a5129255981d7405f0dab06c7af3191b9059102673eb5b6cce98
     name: ozone
@@ -152,7 +152,7 @@ entries:
     - ozone-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.501879776+01:00
+    created: 2018-11-08T12:14:36.055653921+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: fc4228097b56b1e1f1cf0fc0d7a6544011f805dd7ba0b5cd665ca53b1a21390c
     name: ozone
@@ -160,7 +160,7 @@ entries:
     - ozone-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.501592057+01:00
+    created: 2018-11-08T12:14:36.05518074+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: 607640d97ccf35b354a2ed7e7fdc7af51ffa344097e154841a5d586be66372e5
     name: ozone
@@ -168,7 +168,7 @@ entries:
     - ozone-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.501299038+01:00
+    created: 2018-11-08T12:14:36.054664713+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ac2db1f4a97ae547a3c0103b0decf2034c0a0649bb456ec28deb6242b218cf10
     name: ozone
@@ -176,7 +176,7 @@ entries:
     - ozone-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.50102002+01:00
+    created: 2018-11-08T12:14:36.054215655+01:00
     description: A Helm chart for Ozone (Apache Hadoop, HDFS-7240)
     digest: ec8a36b3fb4725e3cf0a512db74f6462c90a9abe245924b502b3f0c27804ed8f
     name: ozone
@@ -209,7 +209,7 @@ entries:
     version: 0.1.0
   prometheus:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.5061013+01:00
+    created: 2018-11-08T12:14:36.060117455+01:00
     description: Flokkr specific prometheus install
     digest: 18056df4cdbc6c3363dd4eda813fe31b4c6fce2dfd6195720271d1a0120efe6d
     name: prometheus
@@ -218,11 +218,11 @@ entries:
     version: 0.2.1
   zookeeper:
   - apiVersion: v1
-    created: 2018-11-08T12:13:56.506265667+01:00
+    created: 2018-11-08T12:14:36.060490767+01:00
     description: Simple Apache Zookeeper chart
     digest: 01d575debc10b492be2bdc7aeebcbb5dc8f7672297f9fd9fa759e4d8dd2d8dba
     name: zookeeper
     urls:
     - zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: 2018-11-08T12:13:56.498433235+01:00
+generated: 2018-11-08T12:14:36.049803037+01:00
